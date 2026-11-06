@@ -1,0 +1,4 @@
+### GET stats of Storm map
+GET https://api.blockfrontmc.com/api/v2/?type=map_stats&map=Storm
+
+###
