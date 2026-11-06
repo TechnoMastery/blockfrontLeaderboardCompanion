@@ -15,6 +15,8 @@ public class SettingHandler {
     private static final SmartSupplier<String> apiKey = new SmartSupplier<>(() -> OptionalFeaturesManager.getString(
             "blockfront_api_key", null
     ));
+    private static boolean isOverridden = false;
+    private static String overridden;
 
     public static final SmartSupplier<Setting> USE_API_KEY = new SmartSupplier<>(() -> new Setting(
             new ResourceLocation(BlockFrontCompanionMod.MOD_ID, "use_api_key"),
@@ -30,9 +32,20 @@ public class SettingHandler {
         return (Boolean) UserPrefsManager.getValueFor(USE_API_KEY.get());
     }
     public static boolean hasApiKey() {
-        return apiKey.get() != null;
+        if (isOverridden) return true;
+        else return apiKey.get() != null;
     }
     public static @Nullable String getApiKey() {
+        if (isOverridden) return overridden;
         return apiKey.get();
+    }
+
+    public static void disableApiKey() {
+        UserPrefsManager.setValueFor(USE_API_KEY.get().id(), USE_API_KEY.get().type().prefType(), false);
+    }
+
+    public static void applyApiKey(String newKey) {
+        if (isOverridden) throw new IllegalStateException("Can't override API key twice!");
+        overridden = newKey;
     }
 }

@@ -1,5 +1,10 @@
 package net.minheur.bfcompanion.ptf;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import net.minheur.bfcompanion.ptf.tabs.*;
 import net.minheur.potoflux.PotoFlux;
 import net.minheur.potoflux.actionRuns.regs.ActionRun;
@@ -11,6 +16,8 @@ import net.minheur.potoflux.loader.mod.events.RegisterRunsEvent;
 import net.minheur.potoflux.loader.mod.events.RegisterTabsEvent;
 import net.minheur.potoflux.registry.RegistryList;
 import net.minheur.potoflux.screen.tabs.Tab;
+import net.minheur.potoflux.translations.Translations;
+import net.minheur.potoflux.ui.UiUtils;
 import net.minheur.potoflux.utils.SmartSupplier;
 import net.minheur.potoflux.utils.ressourcelocation.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.Properties;
 
 @Mod(modId = BlockFrontCompanionMod.MOD_ID, version = "1.0", compatibleVersions = {"8.1.2"} /*, compatibleVersionUrl = "https://technomastery.github.io/PotoFluxAppData/modVersions/template.json" */) // WARNING: use only one of the two compatible version system. When both are present, the local one is always used. the online one is for you to follow the link and get an example.
@@ -69,7 +77,18 @@ public class BlockFrontCompanionMod {
             // todo: check api key works
             return;
         }
-        // todo: show error
+        Alert alert = new Alert(Alert.AlertType.ERROR, "",
+                UiUtils.closeButton.get(), UiUtils.applyButton.get());
+        alert.setTitle(Translations.get("common:error"));
+        alert.setHeaderText(Translations.get("bf_companion:key.none.header"));
+        TextField keyInput = new TextField();
+        alert.getDialogPane().setContent(keyInput);
+
+        Optional<ButtonType> button = alert.showAndWait();
+        if (button.isEmpty() || button.get().getButtonData() == ButtonBar.ButtonData.CANCEL_CLOSE) {
+            SettingHandler.disableApiKey();
+            Platform.exit();
+        } else SettingHandler.applyApiKey(keyInput.getText());
     }
 
     public static @NotNull Path getModDir() {
