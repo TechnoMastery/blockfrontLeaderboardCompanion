@@ -42,7 +42,7 @@ public class BlockFrontCompanionMod {
     private static final RegistryList<Tab> API_KEY_TAB_LIST = new RegistryList<>();
 
     public static final SmartSupplier<Tab> tabScoreboard = PERMANENT_TAB_LIST.add(() -> new Tab(new ResourceLocation(MOD_ID, "scoreboard_tab"), ScoreboardTab.class));
-    public static final SmartSupplier<Tab> tabMaps = API_KEY_TAB_LIST.add(() -> new Tab(new ResourceLocation(MOD_ID, "maps_tab"), MapsTab.class));
+    public static final SmartSupplier<Tab> tabMaps = PERMANENT_TAB_LIST.add(() -> new Tab(new ResourceLocation(MOD_ID, "maps_tab"), MapsTab.class));
     public static final SmartSupplier<Tab> tabPlayer = API_KEY_TAB_LIST.add(() -> new Tab(new ResourceLocation(MOD_ID, "player_tab"), PlayerTab.class));
     public static final SmartSupplier<Tab> tabClans = API_KEY_TAB_LIST.add(() -> new Tab(new ResourceLocation(MOD_ID, "clans_tab"), ClanTab.class));
     public static final SmartSupplier<Tab> tabMatch = API_KEY_TAB_LIST.add(() -> new Tab(new ResourceLocation(MOD_ID, "match_tab"), MatchTab.class));
