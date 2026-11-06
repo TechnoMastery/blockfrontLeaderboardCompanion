@@ -22,6 +22,6 @@ public class MapsTab extends BaseVTab<VBox> {
 
     @Override
     public String getName() {
-        return Translations.get("bfCompanion:name.maps");
+        return Translations.get("bf_companion:name.maps");
     }
 }
