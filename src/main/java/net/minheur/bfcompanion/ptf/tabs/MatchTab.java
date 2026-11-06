@@ -1,10 +1,10 @@
-package your.packagename.tabs.all;
+package net.minheur.bfcompanion.ptf.tabs;
 
 import javafx.scene.layout.VBox;
 import net.minheur.potoflux.screen.tabs.BaseVTab;
 import net.minheur.potoflux.translations.Translations;
 
-public class YourTabClass extends BaseVTab<VBox> {
+public class MatchTab extends BaseVTab<VBox> {
     @Override
     protected void instantiate() {
         PANEL = new VBox();
@@ -16,12 +16,12 @@ public class YourTabClass extends BaseVTab<VBox> {
     }
 
     @Override
-    protected String getTitle() {
-        return Translations.get("yourmodid:tabs.yourTab.title");
+    protected boolean doPreset() {
+        return false;
     }
 
     @Override
     public String getName() {
-        return Translations.get("yourmodid:tabs.yourTab.name");
+        return Translations.get("bfCompanion:name.match");
     }
 }

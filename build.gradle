@@ -5,22 +5,22 @@ plugins {
     id 'application'
 }
 
-group = 'your.packagename'
+group = 'net.minheur'
 version = '1.0'
 
-def ptfVersion = "8.0.1"
+def ptfVersion = "8.1.2"
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            artifactId = "template"
+            artifactId = "bfcompanion"
         }
     }
 
     repositories {
         maven {
-            url = uri ("https://maven.pkg.github.com/TechnoMastery/PotoFlux-mod-template")
+            url = uri ("https://maven.pkg.github.com/TechnoMastery/blockfrontLeaderboardCompanion")
             credentials {
                 username = project.findProperty("gpr.user")
                 password = project.findProperty("gpr.key")
@@ -76,6 +76,7 @@ dependencies {
     implementation "net.minheur:potoflux:$ptfVersion"
     implementation("io.github.mkpaz:atlantafx-base:2.1.0")
 
+    implementation 'org.slf4j:slf4j-api:2.0.20'
 }
 
 processResources {

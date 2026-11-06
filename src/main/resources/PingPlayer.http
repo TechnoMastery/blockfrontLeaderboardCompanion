@@ -1,0 +1,4 @@
+### GET request to example server
+GET https://api.blockfrontmc.com/api/v2/?type=player&name=Min_heur2000
+
+###
