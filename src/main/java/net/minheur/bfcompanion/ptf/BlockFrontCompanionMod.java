@@ -61,7 +61,7 @@ public class BlockFrontCompanionMod {
     }
 
     private void onRegisterLang(@NotNull RegisterLangEvent event) {
-        event.registerLang(new BfCompationTranslations());
+        event.registerLang(new BfCompanionTranslations());
     }
     private void onRegisterTabs(@NotNull RegisterTabsEvent event) {
         PERMANENT_TAB_LIST.register(event.reg);

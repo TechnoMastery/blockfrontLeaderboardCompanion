@@ -2,8 +2,8 @@ package net.minheur.bfcompanion.ptf;
 
 import net.minheur.potoflux.translations.AbstractTranslationsRegistry;
 
-public class BfCompationTranslations extends AbstractTranslationsRegistry {
-    public BfCompationTranslations() {
+public class BfCompanionTranslations extends AbstractTranslationsRegistry {
+    public BfCompanionTranslations() {
         super(BlockFrontCompanionMod.MOD_ID);
     }
 
