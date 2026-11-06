@@ -1,5 +1,6 @@
 package net.minheur.bfcompanion.ptf.tabs;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,6 +32,7 @@ public class ScoreboardTab extends BaseVTab<VBox> {
     protected void setPanel() {
         HBox toolbar = new HBox(10);
         toolbar.setAlignment(Pos.CENTER_LEFT);
+        HBox.setMargin(toolbar, new Insets(0, 5, 0, 5));
 
         onlinePlayersLabel = new Label();
         refreshButton = new Button(Translations.get("bf_companion:refresh"));
