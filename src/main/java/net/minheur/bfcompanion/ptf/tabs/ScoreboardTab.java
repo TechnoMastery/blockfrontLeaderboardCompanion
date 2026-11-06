@@ -22,6 +22,6 @@ public class ScoreboardTab extends BaseVTab<VBox> {
 
     @Override
     public String getName() {
-        return Translations.get("bfCompanion:name.scoreboard");
+        return Translations.get("bf_companion:name.scoreboard");
     }
 }
