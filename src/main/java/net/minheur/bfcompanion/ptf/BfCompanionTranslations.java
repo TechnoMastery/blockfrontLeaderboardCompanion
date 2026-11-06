@@ -11,6 +11,15 @@ public class BfCompanionTranslations extends AbstractTranslationsRegistry {
     protected void makeTranslation() {
         add("name", "scoreboard")
                 .en("Scoreboard");
+        add("refresh")
+                .en("Refresh");
+        add("last_update")
+                .en("Last updated: %s");
+
+        add("scoreboard", "online_players")
+                .en("%s players online");
+        add("scoreboard", "empty")
+                .en("No scoreboard entries");
 
         add("setting", "useapikey")
                 .en("Use BlockFront api key");
