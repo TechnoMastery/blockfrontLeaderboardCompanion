@@ -12,6 +12,9 @@ public class BfCompanionTranslations extends AbstractTranslationsRegistry {
         add("name", "scoreboard")
                 .en("Scoreboard");
 
+        add("setting", "useapikey")
+                .en("Use BlockFront api key");
+
         add("key", "none", "header")
                 .en("""
                         You activated the BlockFront API key but didn't registered one!
