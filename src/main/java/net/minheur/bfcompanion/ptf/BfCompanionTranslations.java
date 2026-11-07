@@ -10,7 +10,10 @@ public class BfCompanionTranslations extends AbstractTranslationsRegistry {
     @Override
     protected void makeTranslation() {
         add("name", "scoreboard")
-                .en("Scoreboard");
+                .en("BlockFront - Scoreboard");
+        add("name", "maps")
+                .en("BlockFront - Maps");
+
         add("refresh")
                 .en("Refresh");
         add("last_update")
