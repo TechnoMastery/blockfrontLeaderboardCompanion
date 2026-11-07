@@ -1,0 +1,4 @@
+### GET for the top 3 on leaderboard
+GET https://api.blockfrontmc.com/api/v2/?type=scoreboard&board=players&limit=3
+
+###
