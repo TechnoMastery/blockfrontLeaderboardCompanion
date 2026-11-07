@@ -1,39 +1,41 @@
 package net.minheur.bfcompanion.ptf.tabs;
 
-import javafx.geometry.Insets;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import net.minheur.potoflux.screen.tabs.BaseVTab;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
+import net.minheur.bfcompanion.data.PlayerLeaderboardEntry;
+import net.minheur.potoflux.screen.tabs.BaseTab;
 import net.minheur.potoflux.translations.Translations;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-public class ScoreboardTab extends BaseVTab<VBox> {
+public class ScoreboardTab extends BaseTab<BorderPane> {
     private Label onlinePlayersLabel;
     private Button refreshButton;
     private Label lastUpdated;
 
-    private TableView<Object> leaderboardTable;
+    private TableView<PlayerLeaderboardEntry> leaderboardTable;
+    private ObservableList<PlayerLeaderboardEntry> leaderboardEntries;
 
     @Override
     protected void instantiate() {
-        PANEL = new VBox();
-        PANEL.setSpacing(12);
+        PANEL = new BorderPane();
     }
 
     @Override
     protected void setPanel() {
-        HBox toolbar = new HBox(10);
-        toolbar.setAlignment(Pos.CENTER_LEFT);
-        HBox.setMargin(toolbar, new Insets(0, 5, 0, 5));
+        VBox top = new VBox(10);
+        top.setAlignment(Pos.CENTER);
 
+        HBox toolbar = new HBox(10);
         onlinePlayersLabel = new Label();
         refreshButton = new Button(Translations.get("bf_companion:refresh"));
         lastUpdated = new Label();
@@ -42,11 +44,33 @@ public class ScoreboardTab extends BaseVTab<VBox> {
         HBox.setHgrow(spacer, Priority.ALWAYS);
         toolbar.getChildren().addAll(onlinePlayersLabel, spacer, lastUpdated, refreshButton);
 
-        leaderboardTable = new TableView<>();
+        top.getChildren().addAll(mkTitle(), toolbar);
+
+        leaderboardEntries = FXCollections.observableArrayList();
+
+        leaderboardTable = new TableView<>(leaderboardEntries); // observes the leaderboardEntries
         leaderboardTable.setPlaceholder(new Label(Translations.get("bf_companion:scoreboard.empty")));
         VBox.setVgrow(leaderboardTable, Priority.ALWAYS);
 
-        vContent.getChildren().addAll(toolbar, leaderboardTable);
+        // mk columns
+        TableColumn<PlayerLeaderboardEntry, Integer> rankCol = new TableColumn<>("Rank");
+        rankCol.setCellValueFactory(new PropertyValueFactory<>("rank"));
+        TableColumn<PlayerLeaderboardEntry, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("playerName"));
+        TableColumn<PlayerLeaderboardEntry, Integer> scoreCol = new TableColumn<>("Score");
+        scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
+
+        leaderboardTable.getColumns().setAll(List.of(rankCol, nameCol, scoreCol));
+
+        leaderboardEntries.addAll( // template
+                new PlayerLeaderboardEntry(1, "1", "moi", 99999),
+                new PlayerLeaderboardEntry(2, "654", "toi", 400),
+                new PlayerLeaderboardEntry(3, "111", "l'autre", 2)
+        );
+
+        PANEL.setTop(top);
+        PANEL.setCenter(leaderboardTable);
+
     }
 
     @Override
